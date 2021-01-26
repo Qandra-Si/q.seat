@@ -1,9 +1,10 @@
 # q.seat
 Q.Seat Database Extention
 
-## qview_main_pilots - для связи main-пилотов и твинков
-  main_pilot_id, main_pilot_name - id и имя основного пилота
-  pilot_id, pilot_name - id и имя твинка
+## qview_main_pilots
+Для связи main-пилотов и твинков.
+* main_pilot_id, main_pilot_name - id и имя основного пилота
+* pilot_id, pilot_name - id и имя твинка
 ```
 main_pilot_id pilot_id   main_pilot_name pilot_name
 92477528      92477528   Ash Hakoke      Ash Hakoke
@@ -15,11 +16,12 @@ main_pilot_id pilot_id   main_pilot_name pilot_name
 2116129465    2116746261 Qandra Si       Kekuit Void
 ```
 
-## qview_pilot_employments - для получения истории принадлежности к корпорациям в группах main-пилотов
-  main_pilot_id, main_pilot_name - id и имя основного пилота
-  character_id, pilot_name - id и имя твинка
-  start_date - когда вступил в корпорацию
-  corporation_id - id корпорации
+## qview_pilot_employments
+Для получения истории принадлежности к корпорациям в группах main-пилотов.
+* main_pilot_id, main_pilot_name - id и имя основного пилота
+* character_id, pilot_name - id и имя твинка
+* start_date - когда вступил в корпорацию
+* corporation_id - id корпорации
 ```
 main_pilot_id start_date corporation_id pilot_name      main_pilot_id main_pilot_name
 2116129465    2020-01-03 1000169        Qandra Si       2116129465    Qandra Si
@@ -33,12 +35,13 @@ main_pilot_id start_date corporation_id pilot_name      main_pilot_id main_pilot
 1579068260    2020-11-22 98550309       l7PO100CJIECAPb 1579068260    l7PO100CJIECAPb
 ```
 
-## qview_employment_interval - для получения интервалов присутствия твинков в корпорациях Инициативы
-  main_pilot_id, main_pilot_name - id и имя основного пилота
-  pilot_id, pilot_name - id и имя твинка
-  enter_time - когда твинк вступил в какую либо корпу Инициативы
-  last_time - когда твинк последний раз менял какую-либо корпорацию
-  in_ri4 - признак присутствия твинка в какой либо корпорации Инициативы "прямо сейчас"
+## qview_employment_interval
+Для получения интервалов присутствия твинков в корпорациях Инициативы.
+* main_pilot_id, main_pilot_name - id и имя основного пилота
+* pilot_id, pilot_name - id и имя твинка
+* enter_time - когда твинк вступил в какую либо корпу Инициативы
+* last_time - когда твинк последний раз менял какую-либо корпорацию
+* in_ri4 - признак присутствия твинка в какой либо корпорации Инициативы "прямо сейчас"
 ```
 main_pilot_id pilot_id   main_pilot_name pilot_name      enter_time last_time  in_ri4
 92477528      92477528   Ash Hakoke      Ash Hakoke      2020-10-31 2020-10-31      1
@@ -50,12 +53,13 @@ main_pilot_id pilot_id   main_pilot_name pilot_name      enter_time last_time  i
 2116129465    2116746261 Qandra Si       Kekuit Void     2020-06-20 2020-06-20      1
 ```
 
-## qview_pilots_activity - для получения сведений и присутствии пилотов в корпорациях Инициативы
-  main_pilot_id, main_pilot_name - id и имя основного пилота
-  enter_time - когда пилот (любой его твинк) вступил в какую либо корпу Инициативы
-  gone_time - когда пилот (все его твинки) покинул все корпорации Инициативы
-  pilots_in_ri4 - кол-во твинков пилота в корпорациях Инициативы
-  twins - кол-во зарегистрированных ткинков пилота
+## qview_pilots_activity
+Для получения сведений и присутствии пилотов в корпорациях Инициативы.
+* main_pilot_id, main_pilot_name - id и имя основного пилота
+* enter_time - когда пилот (любой его твинк) вступил в какую либо корпу Инициативы
+* gone_time - когда пилот (все его твинки) покинул все корпорации Инициативы
+* pilots_in_ri4 - кол-во твинков пилота в корпорациях Инициативы
+* twins - кол-во зарегистрированных ткинков пилота
 ```
 main_pilot_id main_pilot_name enter_time gone_time  pilots_in_ri4 twins
 816125095     Imine Mc'Gowan  2019-10-05 NULL                  11    14
