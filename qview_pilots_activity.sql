@@ -11,7 +11,7 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW seat.qview_pilots_activity AS
       main_pilot_id,
       main_pilot_name,
       MIN(enter_time) AS enter_time,
-      MAX(last_time) AS gone_time,
+      MAX(gone_time) AS gone_time,
       SUM(in_ri4) AS pilots_in_ri4,
       COUNT(1) AS twins
     FROM seat.qview_employment_interval
