@@ -4,8 +4,8 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW seat.qview_employment_interval AS
     ept.enter_time,
     -- lpt.last_time,
     IF(gpt.gone_id=lpt.last_id, NULL, gpt.gone_time) AS gone_time,
-    -- cch.corporation_id IN (98615601,98650099,98553333) AS in_ri4,
-    IF(gpt.gone_id=lpt.last_id, 1, 0) AS in_ri4
+    IF(gpt.gone_id=lpt.last_id, 1, 0) AS in_ri4,
+    (SELECT ticker FROM seat.corporation_infos ci WHERE cch.corporation_id=corporation_id) AS corp_ticker
   FROM
     (SELECT
        character_id AS pilot_id,
