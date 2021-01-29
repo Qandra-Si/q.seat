@@ -16,5 +16,5 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_pilots_bounty_prizes AS
       GROUP BY 1, 2
     ) bounty
   WHERE
-    -- NOT (bounty.main_pilot_id IS NULL) AND
+    NOT (bounty.main_pilot_id IS NULL) AND
     mains.main_pilot_id = bounty.main_pilot_id;
