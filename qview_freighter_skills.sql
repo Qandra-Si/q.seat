@@ -1,4 +1,4 @@
-CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW seat.gstudio_freighter_skills AS
+CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW seat.qview_freighter_skills AS
   SELECT
     typeID AS id,
     typeName AS name
