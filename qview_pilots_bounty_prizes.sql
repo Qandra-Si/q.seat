@@ -15,6 +15,5 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_pilots_bounty_prizes AS
         (cwj.ref_type = 'agent_mission_reward') OR (cwj.ref_type = 'agent_mission_time_bonus_reward') -- миски, агент
       GROUP BY 1, 2
     ) bounty
-  WHERE
-    NOT (main_pilot_name IS NULL)
+  WHERE bounty.main_pilot_id IS NOT NULL
   GROUP BY 1, 2;

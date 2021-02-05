@@ -14,6 +14,5 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_pilots_discovery_rewards AS
         (cwj.ref_type = 'project_discovery_reward') -- решение головоломок
       GROUP BY 1, 2
     ) bounty
-  WHERE
-    NOT (main_pilot_name IS NULL)
+  WHERE bounty.main_pilot_name IS NOT NULL
   GROUP BY 1, 2;
