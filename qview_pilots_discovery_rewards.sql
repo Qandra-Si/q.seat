@@ -1,4 +1,4 @@
-CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_pilots_bounty_prizes AS
+CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_pilots_discovery_rewards AS
   SELECT
     (SELECT DISTINCT main_pilot_name FROM qview_main_pilots WHERE main_pilot_id = bounty.main_pilot_id) AS main_pilot_name,
     bounty.date AS date,
@@ -11,8 +11,7 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_pilots_bounty_prizes AS
       FROM
         corporation_wallet_journals cwj
       WHERE
-        (cwj.ref_type = 'bounty_prizes') OR -- борьба с неписью
-        (cwj.ref_type = 'agent_mission_reward') OR (cwj.ref_type = 'agent_mission_time_bonus_reward') -- миски, агент
+        (cwj.ref_type = 'project_discovery_reward') -- решение головоломок
       GROUP BY 1, 2
     ) bounty
   WHERE
