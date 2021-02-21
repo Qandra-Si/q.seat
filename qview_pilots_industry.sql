@@ -1,11 +1,11 @@
 CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_pilots_industry AS
   SELECT
-    -- ep.pilot_id,
-    -- ep.main_pilot_id,
-    -- ep.pilot_name,
-    ep.main_pilot_name,
+    -- mp.pilot_id,
+    -- mp.main_pilot_id,
+    -- mp.pilot_name,
+    mp.main_pilot_name,
     stat.end_date,
-    COUNT(DISTINCT ep.pilot_id) AS workers_count,
+    COUNT(DISTINCT stat.installer_id) AS workers_count,
     SUM(stat.industry_duration) AS industry_duration,
     SUM(stat.mete_duration) AS mete_duration,
     SUM(stat.invention_duration) AS invention_duration,
@@ -16,7 +16,7 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_pilots_industry AS
     SUM(stat.reaction_jobs) AS reaction_jobs
   FROM
     qview_corp_industry_plain stat,
-    qview_employment_interval ep
+    qview_main_pilots mp
   WHERE
-    stat.installer_id = ep.pilot_id
-  GROUP BY ep.main_pilot_id, stat.end_date;
+    stat.installer_id = mp.pilot_id
+  GROUP BY mp.main_pilot_id, stat.end_date;
