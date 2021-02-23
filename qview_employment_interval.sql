@@ -9,7 +9,7 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW seat.qview_employment_interval AS
   FROM
     (SELECT
        character_id AS pilot_id,
-       MAX(id) AS gone_id,
+       MAX(record_id) AS gone_id,
        MAX(start_date) AS gone_time
      FROM seat.character_corporation_histories
      WHERE corporation_id IN (98615601,98650099,98553333)
@@ -17,7 +17,7 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW seat.qview_employment_interval AS
     ) AS gpt, -- gone pilot' time
     (SELECT
        character_id AS pilot_id,
-       MAX(id) AS last_id,
+       MAX(record_id) AS last_id,
        MAX(start_date) AS last_time
      FROM seat.character_corporation_histories
      GROUP BY character_id
@@ -34,7 +34,7 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW seat.qview_employment_interval AS
     seat.qview_main_pilots AS qmp
   WHERE
     cch.character_id = lpt.pilot_id AND
-    cch.id = lpt.last_id AND
+    cch.record_id = lpt.last_id AND
     qmp.pilot_id = cch.character_id AND
     ept.pilot_id = cch.character_id AND
     gpt.pilot_id = cch.character_id;

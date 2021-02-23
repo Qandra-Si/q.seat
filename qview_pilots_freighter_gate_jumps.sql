@@ -1,11 +1,11 @@
 CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_pilots_freighter_gate_jumps AS
   SELECT
-    (SELECT DISTINCT main_pilot_name FROM qview_main_pilots WHERE main_pilot_id = fees.main_pilot_id) AS main_pilot_name,
+    ei.main_pilot_name,
     fees.date AS date,
     -SUM(fees.fees_paid) AS fees_paid
   FROM
     ( SELECT
-        (SELECT main_pilot_id FROM qview_main_and_twin_ids WHERE cwj.character_id = pilot_id) AS main_pilot_id,
+        cwj.character_id AS pilot_id,
         DATE(cwj.date) AS date,
         SUM(cwj.amount) AS fees_paid
       FROM
@@ -14,6 +14,11 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_pilots_freighter_gate_jumps A
         cwj.ref_type = 'structure_gate_jump' AND
         cwj.amount < (-1500000) -- Freighter amount fees paid
       GROUP BY 1, 2
-    ) fees
-  -- WHERE fees.main_pilot_id IS NOT NULL
-  GROUP BY 1, 2;
+    ) fees,
+    qview_employment_interval ei
+  WHERE
+    ei.pilot_id = fees.pilot_id AND
+    ei.enter_time <= fees.date AND IF(gone_time IS NULL,TRUE,fees.date <= ei.gone_time) 
+  GROUP BY ei.main_pilot_id, 2
+  -- ORDER BY 1 DESC
+  ;

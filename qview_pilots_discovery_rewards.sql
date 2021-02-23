@@ -1,11 +1,11 @@
 CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_pilots_discovery_rewards AS
   SELECT
-    (SELECT DISTINCT main_pilot_name FROM qview_main_pilots WHERE main_pilot_id = bounty.main_pilot_id) AS main_pilot_name,
+    ei.main_pilot_name,
     bounty.date AS date,
     SUM(bounty.amount) AS tax_earned
   FROM
     ( SELECT
-        (SELECT main_pilot_id FROM qview_main_and_twin_ids WHERE cwj.second_party_id = pilot_id) AS main_pilot_id,
+        cwj.second_party_id AS pilot_id,
         DATE(cwj.date) AS date,
         SUM(cwj.amount) AS amount
       FROM
@@ -13,6 +13,11 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_pilots_discovery_rewards AS
       WHERE
         (cwj.ref_type = 'project_discovery_reward') -- решение головоломок
       GROUP BY 1, 2
-    ) bounty
-  WHERE bounty.main_pilot_name IS NOT NULL
-  GROUP BY 1, 2;
+    ) bounty,
+    qview_employment_interval AS ei
+  WHERE
+    ei.pilot_id = bounty.pilot_id AND
+    ei.enter_time <= bounty.date AND IF(gone_time IS NULL,TRUE,bounty.date <= ei.gone_time)
+  GROUP BY ei.main_pilot_id, 2
+  -- ORDER BY 2 DESC
+  ;
