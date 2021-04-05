@@ -15,7 +15,7 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_industry_stat_start_count AS
   WHERE
     -- cij.activity_id = 1 AND
     cij.duration <= (60*60*24*7) AND -- 1.5 year stat: only 138 industry runs longer then 1 week
-    cij.corporation_id = 98615601 AND -- RI4
+    cij.corporation_id in (98677876,98615601) AND -- RIID,RI4
     cij.status <> 'cancelled'
   GROUP BY 1 -- , 2 -- , 3
   -- ORDER BY 1 -- DESC -- 1, 2, 3

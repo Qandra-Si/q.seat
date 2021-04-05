@@ -20,7 +20,7 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_corp_industry_plain AS
       FROM
         corporation_industry_jobs
       WHERE
-        corporation_id = 98615601 AND -- RI4
+        corporation_id in (98677876,98615601) AND -- RIID,RI4
         status <> 'cancelled'
       GROUP BY 1, 2, 3
     ) j

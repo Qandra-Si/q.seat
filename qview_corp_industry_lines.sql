@@ -6,6 +6,6 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_corp_industry_lines AS
   FROM
     corporation_industry_jobs cij
   WHERE
-    cij.corporation_id = 98615601 AND -- RI4
+    cij.corporation_id in (98677876,98615601) AND -- RIID,RI4
     cij.status <> 'cancelled'
   GROUP BY 1, 2;

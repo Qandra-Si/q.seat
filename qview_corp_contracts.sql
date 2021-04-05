@@ -22,7 +22,7 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_corp_contracts AS
         cc.contract_id = cd.contract_id AND
         cd.for_corporation = 1 AND
         cd.date_accepted IS NOT NULL AND
-        cd.issuer_corporation_id IN (98615601,98650099,98553333) -- RI4,RI5,RS
+        cd.issuer_corporation_id IN (98677876,98615601,98650099,98553333) -- RIID,RI4,RI5,RS
       GROUP BY 1, 2, 3
     ) cntrcts
   -- WHERE cntrcts.main_pilot_id IS NOT NULL

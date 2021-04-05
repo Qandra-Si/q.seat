@@ -13,7 +13,7 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_corp_industry AS
     corporation_industry_jobs cij
     -- , qview_employment_interval ep
   WHERE
-    cij.corporation_id = 98615601 AND -- RI4
+    cij.corporation_id in (98677876,98615601) AND -- RIID,RI4
     -- cij.installer_id = ep.pilot_id AND
     -- ep.in_ri4 AND -- blame: ((cij.end_date IS NULL) OR (cij.end_date <= pilot.end_date)) AND
     cij.status <> 'cancelled'
