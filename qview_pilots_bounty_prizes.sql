@@ -12,6 +12,7 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_pilots_bounty_prizes AS
         corporation_wallet_journals cwj
       WHERE
         (cwj.ref_type = 'bounty_prizes') OR -- борьба с неписью
+        (cwj.ref_type = 'ess_escrow_transfer') OR -- выплаты баунти через банкомат
         (cwj.ref_type = 'agent_mission_reward') OR (cwj.ref_type = 'agent_mission_time_bonus_reward') -- миски, агент
       GROUP BY 1, 2
     ) bounty,
