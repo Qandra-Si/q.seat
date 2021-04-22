@@ -12,7 +12,7 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_pilots_planetary_jobs AS
     ((t.groupID & b'0010') ^ b'0010') + ((t.groupID & b'1000') >> 3 | (t.groupID & b'0001')) + 1 AS tier_id,
     pp.quantity * t.volume AS volume,
     t.typeName as material_name,
-    pp.quantity * (SELECT average_price FROM market_prices WHERE type_id=pp.material_id) today_price
+    pp.quantity * (SELECT average_price FROM market_prices WHERE type_id=pp.material_id) AS today_price
   FROM
     ( SELECT
         DATE(cwt.date) AS date,
@@ -24,8 +24,34 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_pilots_planetary_jobs AS
         invTypes AS t,
         invGroups AS g
       WHERE
-        cwt.unit_price = 0.01 AND 
+        cwt.date <= '2021-01-21' AND -- последний день, когда сдавалась планетарка по старой схеме
+        cwt.unit_price = 0.01 AND
         cwt.is_buy = 0 AND
+        t.typeID = cwt.type_id AND
+        -- Basic Commodities - Tier 1
+        -- Refined Commodities - Tier 2
+        -- Specialized Commodities - Tier 3
+        -- Advanced Commodities - Tier 4
+        t.groupID = g.groupID AND
+        -- Planetary Commodities
+        g.categoryID = 43
+      GROUP BY 1, 2, 3
+        UNION
+      SELECT
+        DATE(cwt.date) AS date,
+        p.main_pilot_id,
+        cwt.type_id AS material_id,
+        SUM(cwt.quantity) AS quantity
+      FROM
+        corporation_wallet_transactions cwt,
+        invTypes AS t,
+        invGroups AS g,
+        qview_main_and_twin_ids p
+      WHERE
+        cwt.date >= '2021-04-22' AND -- начиная с этого дня планетарка сдаётся по новой схеме
+        cwt.corporation_id IN (98677876) AND
+        p.pilot_id = cwt.client_id AND
+        cwt.is_buy = 1 AND
         t.typeID = cwt.type_id AND
         -- Basic Commodities - Tier 1
         -- Refined Commodities - Tier 2
