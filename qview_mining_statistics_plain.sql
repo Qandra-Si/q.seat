@@ -7,6 +7,7 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_mining_statistics_plain AS
     (SELECT volume FROM qview_mining_statistics WHERE year=d.y AND month=d.m AND ore='moon') AS moon,
     (SELECT volume FROM qview_mining_statistics WHERE year=d.y AND month=d.m AND ore='ice') AS ice,
     (SELECT volume FROM qview_mining_statistics WHERE year=d.y AND month=d.m AND ore='gas') AS gas,
-    (SELECT volume FROM qview_mining_statistics WHERE year=d.y AND month=d.m AND ore='abyss') AS abyss
+    (SELECT volume FROM qview_mining_statistics WHERE year=d.y AND month=d.m AND ore='abyss') AS abyss,
+    (SELECT volume FROM qview_mining_statistics WHERE year=d.y AND month=d.m AND ore='mercoxit') AS mercoxit
   FROM
     (SELECT DISTINCT year AS y, month AS m FROM character_minings) d;

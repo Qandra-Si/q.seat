@@ -21,8 +21,22 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_pilots_minings AS
             character_minings cm,
             qview_sde_mining_materials ore
           WHERE
-            cm.type_id = ore.type_id
+            cm.type_id = ore.type_id AND
+            ore.type_id NOT IN (28412, 28414, 11396, 17870, 28413, 17869)
           GROUP BY 1, 2, 3
+            UNION
+          SELECT
+            cm.character_id AS pilot_id,
+            DATE(cm.date) AS date,
+            'mercoxit' AS ore,
+            SUM(cm.quantity * ore.volume) AS volume
+          FROM
+            character_minings cm,
+            qview_sde_mining_materials ore
+          WHERE
+            cm.type_id = ore.type_id AND
+            ore.type_id IN (28412, 28414, 11396, 17870, 28413, 17869)
+          GROUP BY 1, 2
         ) stat,
         qview_employment_interval AS ei
       WHERE
