@@ -1,6 +1,7 @@
 CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_sde_mining_materials AS
   -- parent  id    name                   rus                                 ore/gas
   -- 533     1032  Gas Clouds Materials   Продукты переработки газа
+  --  1032   983   Booster Gas Clouds      Газы для производства стимуляторов Amber Mykoserocin, Azure Mykoserocin, Celadon Mykoserocin, ...
   --  1032   1859  Fullerenes              Фуллерены                          Fullerite-C540, Fullerite-C320, Fullerite-C28, ...
   -- 533     1031  Raw Materials          Сырьевые материалы
   --  1031   1855   Ice Ores               Ледяные руды                       Clear Icicle, Glacial Mass, Blue Ice, ...
@@ -52,7 +53,7 @@ SELECT
     t.marketGroupID AS class_id,
     t.marketGroupID AS category_id,
     t.typeID AS type_id,
-    IF(t.marketGroupID=1855,'ice',IF(t.marketGroupID=1856,'ac',IF(t.marketGroupID=1859,'gas','abyss'))) AS class_tag,
+    IF(t.marketGroupID=1855,'ice',IF(t.marketGroupID=1856,'ac',IF(t.marketGroupID IN (1859,983),'gas','abyss'))) AS class_tag,
     mg.marketGroupName AS category_name,
     t.typeName AS name,
     t.volume AS volume
@@ -60,6 +61,6 @@ SELECT
     invMarketGroups mg,
     invTypes t
   WHERE
-   -- 1855:Ice Ores, 2479:Abyssal Materials, 1856:Alloys & Compounds, 1859:Fullerenes
-   t.marketGroupID IN (1855,2479,1856,1859) AND
+   -- 1855:Ice Ores, 2479:Abyssal Materials, 1856:Alloys & Compounds, 1859+983:Fullerenes+Mykoserocin
+   t.marketGroupID IN (1855,2479,1856,1859,983) AND
    t.marketGroupID = mg.marketGroupID;
