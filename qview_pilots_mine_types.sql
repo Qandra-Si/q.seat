@@ -1,14 +1,14 @@
 CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_pilots_mine_types AS
   SELECT
-    stat.main_pilot_id,
     stat.year,
     stat.month,
+    stat.main_pilot_name,
     solar_names.itemName as "solar system",
     t.typeName as "name",
     ROUND(SUM(stat.quantity * ore.volume),0) AS volume
   FROM
     ( SELECT
-        ei.main_pilot_id AS main_pilot_id,
+        ei.main_pilot_name AS main_pilot_name,
         cm.year,
         cm.month,
         cm.solar_system_id,
@@ -30,4 +30,4 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_pilots_mine_types AS
     t.typeID = stat.type_id AND
     solar_names.itemID = stat.solar_system_id
   GROUP BY 1, 2, 3, 4, 5
-  ORDER BY 1, 2 DESC, 3 DESC, 4, 5;
+  ORDER BY 1 DESC, 2 DESC, 3, 4, 5;
