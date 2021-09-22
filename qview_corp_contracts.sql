@@ -20,6 +20,7 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_corp_contracts AS
         contract_details cd
       WHERE
         cc.contract_id = cd.contract_id AND
+        cd.price > 0 AND -- фильтруем пустые (сюда могут попадать корпделивери)
         cd.for_corporation = 1 AND
         cd.date_accepted IS NOT NULL AND
         cd.issuer_corporation_id IN (98677876,98615601,98650099,98553333) -- RIID,RI4,RI5,RS
