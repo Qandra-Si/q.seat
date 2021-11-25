@@ -1,4 +1,9 @@
 # q.seat
+[![GitHub issues](https://img.shields.io/github/issues/Qandra-Si/q.seat)](https://github.com/Qandra-Si/q.seat/issues)
+[![GitHub forks](https://img.shields.io/github/forks/Qandra-Si/q.seat)](https://github.com/Qandra-Si/q.seat/network)
+[![GitHub stars](https://img.shields.io/github/stars/Qandra-Si/q.seat)](https://github.com/Qandra-Si/q.seat/stargazers)
+[![GitHub license](https://img.shields.io/badge/license-beer--ware-lightgrey)](https://github.com/Qandra-Si/q.seat/blob/main/LICENSE)
+
 Q.Seat Database Extention
 
 ## qview_main_pilots
