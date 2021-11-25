@@ -50,7 +50,7 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_pilots_planetary_jobs AS
           SUM(cwt.quantity) AS quantity
         FROM
           corporation_wallet_transactions cwt
-            LEFT OUTER JOIN corporation_wallet_journals cwj ON (cwt.journal_ref_id = cwj.reference_id),
+            LEFT OUTER JOIN corporation_wallet_journals cwj ON (cwt.journal_ref_id = cwj.id), -- 2021.11.25 обновился seat
           invTypes AS t,
           invGroups AS g,
           qview_main_and_twin_ids p
