@@ -34,7 +34,7 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_industry_stat_t2 AS
         cij.product_type_id = mt.typeID AND cij.product_type_id = t.typeID AND
         mt.metaGroupID = 2 AND
         cij.activity_id = 1 AND
-        cij.corporation_id in (98677876,98615601) AND -- RIID,RI4
+        cij.corporation_id in (98677876,98615601,98400890) AND -- RIID,RI4,DJEW
         t.groupID = g.groupID AND
         g.categoryID = c.categoryID
         -- AND c.categoryName NOT IN ('Module','Drone','Ship','Charge','Fighter')

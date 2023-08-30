@@ -15,5 +15,5 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_corp_ceo_actualization AS
       ) AS is_actualized
   FROM corporation_infos ci
          LEFT OUTER JOIN character_infos pi ON (pi.character_id = ci.ceo_id)
-  WHERE ci.corporation_id IN (98677876,98615601,98553333,98650099) -- 'RIID','RI4','R ST','R I5'
+  WHERE ci.corporation_id IN (98677876,98615601,98553333,98650099,98400890) -- 'RIID','RI4','R ST','R I5','DJEW'
   ;

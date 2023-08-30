@@ -16,7 +16,7 @@ FROM
       cij.activity_id,
       SUM(cij.duration) AS duration
     FROM corporation_industry_jobs cij
-    WHERE cij.corporation_id in (98677876,98615601) -- RIID,RI4
+    WHERE cij.corporation_id in (98677876,98615601,98400890) -- RIID,RI4,DJEW
     GROUP BY 1, 2, 3
   ) jobs,
   ( SELECT

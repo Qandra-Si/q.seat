@@ -30,7 +30,7 @@ CREATE OR REPLACE ALGORITHM = UNDEFINED VIEW qview_corp_orders AS
         corporation_orders co,
         invTypes t
       WHERE
-        co.corporation_id in (98677876,98553333,98615601,98650099) AND -- 'RIID', 'RI4', 'R ST', 'RI 5'
+        co.corporation_id in (98677876,98553333,98615601,98650099,98400890) AND -- 'RIID', 'RI4', 'R ST', 'RI 5', 'DJEW'
         active.corporation_id = co.corporation_id AND
         t.typeID = co.type_id AND
         co.updated_at >= active.time
